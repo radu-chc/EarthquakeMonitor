@@ -18,6 +18,7 @@ namespace EarthquakeMonitor.ViewModels {
         private const int noHours = 1;
         private const int numberOfLinesInCityFile = 291938;
         private bool fileLoaded = false;
+        private HashSet<string> eqIds;
 
         private string _apiStatusMessage;
 
@@ -70,6 +71,7 @@ namespace EarthquakeMonitor.ViewModels {
             Earthquakes = new ObservableCollection<EarthquakeViewModel>();
             latestStartDate = DateTime.UtcNow.AddHours(-noHours);
             cities = new List<City>();
+            eqIds = new HashSet<string>();
 
             cityLoader = new BackgroundWorker();
             cityLoader.DoWork += loadCities;
@@ -135,26 +137,37 @@ namespace EarthquakeMonitor.ViewModels {
             ApiStatusMessage = "Requesting Earthquake Data...";  // MVVM property
             DateTime endDate = DateTime.UtcNow;
             List<Earthquake> latestEarthquakes = await EarthquakeSearch.GetEarthquakes(latestStartDate, endDate);
-            latestStartDate = endDate;
+            latestEarthquakes.Reverse();
 
             foreach (Earthquake eq in latestEarthquakes) {
                 EarthquakeViewModel eqv = new EarthquakeViewModel();
                 DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-                eqv.Date = dtDateTime.AddMilliseconds(eq.features.time).ToLocalTime();
-                eqv.Magnitude = eq.features.mag;
-                eqv.Longitude = eq.geometry.coordinates[0];
-                eqv.Latitude = eq.geometry.coordinates[1];
-                eqv.Depth = eq.geometry.coordinates[2];
+                eqv.Id = eq.id;
 
-                var coord = new GeoCoordinate(eqv.Latitude, eqv.Longitude);
+                if (!eqIds.Contains(eqv.Id)) {
+                    eqv.Date = dtDateTime.AddMilliseconds(eq.features.time).ToLocalTime();
+                    eqv.Magnitude = eq.features.mag;
+                    eqv.Longitude = eq.geometry.coordinates[0];
+                    eqv.Latitude = eq.geometry.coordinates[1];
+                    eqv.Depth = eq.geometry.coordinates[2];
 
-                if (fileLoaded) {
-                    eqv.ClosestCities = cities.OrderBy(x => x.Geocoordinate.GetDistanceTo(coord))
-                           .Take(3).Select(x => x.Name).Aggregate((current, next) => current + ", " + next);
+                    var coord = new GeoCoordinate(eqv.Latitude, eqv.Longitude);
+
+                    if (fileLoaded) {
+                        eqv.ClosestCities = cities.OrderBy(x => x.Geocoordinate.GetDistanceTo(coord))
+                               .Take(3).Select(x => x.Name).Aggregate((current, next) => current + ", " + next);
+                    }
+
+                    Earthquakes.Add(eqv);
+                    eqIds.Add(eqv.Id);
                 }
+            }
 
 
-                Earthquakes.Add(eqv);
+            // Limit future JSON responses. (only look for more recent earthquakes)
+            if (latestEarthquakes.Count > 0) {
+                DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                latestStartDate = dtDateTime.AddMilliseconds(latestEarthquakes[latestEarthquakes.Count-1].features.time);
             }
 
             ApiStatusMessage = "Earthquake Data Updated at " + DateTime.Now;

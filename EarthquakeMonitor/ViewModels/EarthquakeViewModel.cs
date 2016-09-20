@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace EarthquakeMonitor.ViewModels {
 
     class EarthquakeViewModel : INotifyPropertyChanged {
+        public String Id { get; set; }
         public DateTime Date { get; set; }
         public Double Magnitude { get; set; }
         public Double Longitude { get; set; }
