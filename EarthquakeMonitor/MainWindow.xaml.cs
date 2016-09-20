@@ -27,7 +27,7 @@ namespace EarthquakeMonitor {
         static DateTime latestStartDate;
         static List<City> cities;
         const int updateIntervalSec = 30;
-        const int noHours = 5;
+        const int noHours = 1;
 
         private readonly BackgroundWorker worker = new BackgroundWorker();
 
