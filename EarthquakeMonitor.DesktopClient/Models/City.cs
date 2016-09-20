@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
-using EarthquakeMonitor.Utilities;
+using EarthquakeMonitor.DesktopClient.Utilities;
 
-namespace EarthquakeMonitor {
+namespace EarthquakeMonitor.DesktopClient.Models {
 
     class City {
         public GeoCoordinate Geocoordinate { get; set; }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json;
 using System.Net.Http;
-using EarthquakeMonitor.Models;
+using EarthquakeMonitor.DesktopClient.Models;
 
-namespace EarthquakeMonitor.Utilities {
+namespace EarthquakeMonitor.DesktopClient.Utilities {
 
     class EarthquakeSearch {
 

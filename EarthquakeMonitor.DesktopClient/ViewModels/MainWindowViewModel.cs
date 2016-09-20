@@ -6,10 +6,10 @@ using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EarthquakeMonitor.Utilities;
-using EarthquakeMonitor.Models;
+using EarthquakeMonitor.DesktopClient.Utilities;
+using EarthquakeMonitor.DesktopClient.Models;
 
-namespace EarthquakeMonitor.ViewModels {
+namespace EarthquakeMonitor.DesktopClient.ViewModels {
 
      class MainWindowViewModel : INotifyPropertyChanged {
         private DateTime latestStartDate;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EarthquakeMonitor.ViewModels {
+namespace EarthquakeMonitor.DesktopClient.ViewModels {
 
     class EarthquakeViewModel : INotifyPropertyChanged {
         public String Id { get; set; }

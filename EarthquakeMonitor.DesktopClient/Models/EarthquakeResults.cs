@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EarthquakeMonitor.Models {
+namespace EarthquakeMonitor.DesktopClient.Models {
 
     /*
      * Properties are camelCased because they are supplied as such in the JSON.

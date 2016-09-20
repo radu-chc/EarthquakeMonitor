@@ -15,9 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EarthquakeMonitor.ViewModels;
+using EarthquakeMonitor.DesktopClient.ViewModels;
 
-namespace EarthquakeMonitor.Views {
+namespace EarthquakeMonitor.DesktopClient.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

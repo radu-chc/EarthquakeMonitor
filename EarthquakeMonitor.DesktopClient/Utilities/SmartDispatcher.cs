@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace EarthquakeMonitor.Utilities {
+namespace EarthquakeMonitor.DesktopClient.Utilities {
     /*
      * Source: http://stackoverflow.com/questions/12442622/async-friendly-dispatchertimer-wrapper-subclass
      */

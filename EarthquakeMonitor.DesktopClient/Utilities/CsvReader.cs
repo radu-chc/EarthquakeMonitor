@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace EarthquakeMonitor.Utilities {
+namespace EarthquakeMonitor.DesktopClient.Utilities {
     /*
      * Source: http://stackoverflow.com/questions/769621/dealing-with-commas-in-a-csv-file
      */
