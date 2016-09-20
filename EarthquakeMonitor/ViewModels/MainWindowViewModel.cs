@@ -84,7 +84,7 @@ namespace EarthquakeMonitor.ViewModels {
             timer.IsReentrant = false;
             timer.Interval = TimeSpan.FromSeconds(updateIntervalSec);
             timer.TickTask = async () => {
-                await loadLatestEarthquakes();
+                 await loadLatestEarthquakes();
             };
             timer.Start();
 
